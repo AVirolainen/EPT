@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Dimensions, TextInput, Image} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Dimensions, TextInput, Image, Alert } from 'react-native';
 
 let deviceWidth = Dimensions.get('window').width
 let deviceHeight = Dimensions.get('window').height
@@ -14,17 +14,18 @@ const Lab2 = ({navigation}) =>{
     const [nValue, setNValue] = useState()
     const [results, setResults] = useState()
     const [isCalculated, setIsCalculated] = useState(false)
+    const [timeExec, setTimeExec] = useState(0)
     
     const handleCalculating = ()=>{
+        let time = performance.now();
+
         let s = Math.floor(Math.sqrt(nValue))+1
-        console.log(s)
+        
         let k = 1
         let flag = true
         while(flag){
             let temp = ((s+k)**2)-nValue
             if(isInt(Math.sqrt(temp))){
-                console.log(Math.sqrt(temp))
-                console.log(s+k)
                 flag = false
                 setResults([Math.sqrt(temp), s+k])
                 setIsCalculated(true)
@@ -32,7 +33,18 @@ const Lab2 = ({navigation}) =>{
             k+=1
         }
 
+        time = performance.now() - time
+        console.log(time/1000)
+        if (time/1000 > 1){
+            createTwoButtonAlert(time/1000)
+        }
+
     }
+    const createTwoButtonAlert = (a) => {Alert.alert(
+      "Помилка. Час виконання: "+a,
+      
+    );}
+
     let resultText
     let resultExample
     let img
