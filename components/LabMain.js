@@ -29,7 +29,7 @@ const LabMain = ({navigation}) =>{
                     <Text style={styles.buttonText}>№3_2</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.labButton}
-                                onPress={() => navigation.navigate('Working')}>
+                                onPress={() => navigation.navigate('Lab3')}>
                     <Text style={styles.buttonText}>Лабораторна робота</Text>
                     <Text style={styles.buttonText}>№3_3</Text>
                 </TouchableOpacity>
